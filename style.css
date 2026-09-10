@@ -1,0 +1,982 @@
+/* ==========================================================================
+   Syed Yaseen — Portfolio Stylesheet
+   Table of contents:
+     1. Reset & base
+     2. Navigation
+     3. Hero
+     4. Marquee
+     5. Section shell (shared heading/reveal styles)
+     6. About
+     7. Experience timeline
+     8. Projects
+     9. Stack
+     10. Education
+     11. Contact
+     12. Footer
+     13. Keyframes & motion preferences
+   ========================================================================== */
+
+/* 1. Reset & base
+   ========================================================================== */
+:root {
+  --ink: #151311;
+  --surface: #1e1b18;
+  --hairline: rgba(255, 255, 255, 0.09);
+  --fg: #f3efe9;
+  --muted: #a9a49c;
+  --ember: #f0a24a;
+  --ember-ink: #231a10;
+  --maxw: 64rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--fg);
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--ember-ink);
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    padding: 0 2.5rem;
+  }
+}
+
+/* Shared underline hover effect (nav links, footer link, ghost CTA) */
+.ul {
+  position: relative;
+}
+
+.ul::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ul:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Shared label style used by <dt> (About facts) and .k (Contact cards) */
+dt,
+.k {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ember);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+/* Shared meta text style (dates, locations, footer copy) */
+.meta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+/* Shared "arrow" icon used on links/cards/projects */
+.arrow {
+  width: 20px;
+  height: 20px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: 0.5s;
+}
+
+/* Scroll-reveal animation base state */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.vis {
+  opacity: 1;
+  transform: none;
+}
+
+/* 2. Navigation
+   ========================================================================== */
+header.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  transition: background 0.5s, border-color 0.5s;
+  border-bottom: 1px solid transparent;
+}
+
+header.nav.scrolled {
+  background: rgba(21, 19, 17, 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--hairline);
+}
+
+.navbar {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 99px;
+  background: var(--ember);
+  position: relative;
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  background: var(--ember);
+  animation: ember 6s ease-in-out infinite;
+}
+
+nav.links {
+  display: none;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  nav.links {
+    display: flex;
+  }
+}
+
+nav.links a,
+.ghost {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+nav.links a:hover {
+  color: var(--fg);
+}
+
+/* Scroll progress bar */
+#bar {
+  height: 1px;
+  background: var(--ember);
+  width: 0;
+}
+
+/* 3. Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: 8rem 0 4rem;
+  overflow: hidden;
+}
+
+.atmos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background-image: linear-gradient(var(--hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(120% 80% at 50% 0%, #000, transparent);
+  mask-image: radial-gradient(120% 80% at 50% 0%, #000, transparent);
+}
+
+.glow {
+  position: absolute;
+  border-radius: 99px;
+  filter: blur(120px);
+  animation: drift 18s ease-in-out infinite;
+}
+
+.glow.a {
+  right: -8rem;
+  top: -8rem;
+  width: 36rem;
+  height: 36rem;
+  background: rgba(240, 162, 74, 0.1);
+}
+
+.glow.b {
+  left: -6rem;
+  bottom: -10rem;
+  width: 28rem;
+  height: 28rem;
+  background: rgba(240, 190, 140, 0.06);
+}
+
+.eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--ember);
+}
+
+h1 {
+  font-size: clamp(3.1rem, 11vw, 7.5rem);
+  line-height: 0.92;
+  margin-top: 2rem;
+}
+
+h1 .line {
+  display: block;
+  overflow: hidden;
+}
+
+h1 .line > span {
+  display: block;
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+h1 .dim {
+  color: var(--muted);
+}
+
+.caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.7em;
+  background: var(--ember);
+  vertical-align: middle;
+  margin-left: 0.15em;
+  animation: blink 1.2s steps(1) infinite;
+}
+
+.herogrid {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .herogrid {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: end;
+  }
+}
+
+.lede {
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 99px;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: var(--ember);
+  color: var(--ember-ink);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn.outline {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--hairline);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+}
+
+.socials {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.socials a {
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: var(--ember);
+}
+
+.socials svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 4. Marquee
+   ========================================================================== */
+.marquee {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: rgba(30, 27, 24, 0.4);
+  padding: 1.15rem 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+.marquee .track {
+  display: flex;
+  gap: 2.5rem;
+  width: max-content;
+  align-items: center;
+  animation: marq 32s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee span.i {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+}
+
+.marquee i {
+  width: 4px;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(240, 162, 74, 0.6);
+  display: inline-block;
+}
+
+/* 5. Section shell
+   ========================================================================== */
+section.s {
+  border-top: 1px solid var(--hairline);
+  padding: 6rem 0;
+}
+
+@media (min-width: 768px) {
+  section.s {
+    padding: 8rem 0;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.head .no {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--ember);
+}
+
+.head h2 {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+}
+
+.head .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+  margin-left: auto;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .head .rule {
+    display: block;
+  }
+}
+
+/* 6. About
+   ========================================================================== */
+.about {
+  display: grid;
+  gap: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .about {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+.about p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.about p.lead {
+  color: var(--fg);
+}
+
+dl.facts {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+dl.facts > div {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+dl.facts > div:last-child {
+  border-bottom: 0;
+}
+
+dd {
+  font-size: 0.95rem;
+}
+
+/* 7. Experience timeline
+   ========================================================================== */
+ol.tl {
+  list-style: none;
+  border-left: 1px solid var(--hairline);
+  padding-left: 2rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  ol.tl {
+    padding-left: 3rem;
+  }
+}
+
+ol.tl li {
+  position: relative;
+  padding-bottom: 3.5rem;
+}
+
+ol.tl li:last-child {
+  padding-bottom: 0;
+}
+
+ol.tl li .pin {
+  position: absolute;
+  left: -2.28rem;
+  top: 0.55rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--ember);
+}
+
+@media (min-width: 768px) {
+  ol.tl li .pin {
+    left: -3.28rem;
+  }
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .role {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.role h3 {
+  font-size: 1.3rem;
+}
+
+.role h3 em {
+  font-style: normal;
+  color: var(--ember);
+}
+
+ul.pts {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+ul.pts li {
+  display: flex;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+ul.pts li::before {
+  content: "";
+  margin-top: 0.65rem;
+  width: 1rem;
+  height: 1px;
+  background: rgba(240, 162, 74, 0.7);
+  flex: none;
+}
+
+/* 8. Projects
+   ========================================================================== */
+.projects {
+  border-top: 1px solid var(--hairline);
+}
+
+.proj {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+  transition: background 0.5s;
+}
+
+@media (min-width: 768px) {
+  .proj {
+    grid-template-columns: auto 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+    padding: 3rem 0;
+  }
+}
+
+.proj:hover {
+  background: rgba(30, 27, 24, 0.6);
+}
+
+.proj .no {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--ember);
+}
+
+.proj h3 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.proj:hover h3 {
+  transform: translateX(4px);
+}
+
+.proj p {
+  margin-top: 1rem;
+  max-width: 42rem;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  border: 1px solid var(--hairline);
+  border-radius: 99px;
+  padding: 0.25rem 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: 0.3s;
+}
+
+.proj:hover .tag {
+  border-color: rgba(240, 162, 74, 0.4);
+  color: var(--fg);
+}
+
+.side {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .side {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.proj:hover .arrow {
+  stroke: var(--ember);
+  transform: translate(3px, -3px);
+}
+
+/* 9. Stack
+   ========================================================================== */
+.stack {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .stack {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cell {
+  background: var(--ink);
+  padding: 1.75rem;
+  transition: background 0.5s;
+}
+
+@media (min-width: 768px) {
+  .cell {
+    padding: 2.25rem;
+  }
+}
+
+.cell:hover {
+  background: var(--surface);
+}
+
+.cell h3 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ember);
+  font-weight: 500;
+}
+
+.cell ul {
+  list-style: none;
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.cell li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.cell li::before {
+  content: "";
+  width: 12px;
+  height: 1px;
+  background: var(--hairline);
+  transition: 0.3s;
+}
+
+.cell li:hover {
+  color: var(--fg);
+}
+
+.cell li:hover::before {
+  width: 24px;
+  background: var(--ember);
+}
+
+/* 10. Education
+   ========================================================================== */
+.edu {
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.edu .row {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.edu .row:last-child {
+  border-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .edu .row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+.edu h3 {
+  font-size: 1.35rem;
+}
+
+.edu .sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* 11. Contact
+   ========================================================================== */
+.contact {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--hairline);
+  padding: 7rem 0;
+}
+
+@media (min-width: 768px) {
+  .contact {
+    padding: 10rem 0;
+  }
+}
+
+.contact h2 {
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  line-height: 1.02;
+  max-width: 48rem;
+  margin-top: 2rem;
+}
+
+.contact .glow {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10rem;
+  width: 30rem;
+  height: 30rem;
+  background: rgba(240, 162, 74, 0.1);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.cards {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  background: var(--ink);
+  padding: 1.5rem;
+  transition: background 0.5s;
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 2rem;
+  }
+}
+
+.card:hover {
+  background: var(--surface);
+}
+
+.card .val {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.card:hover .arrow {
+  stroke: var(--ember);
+  transform: translate(3px, -3px);
+}
+
+/* 12. Footer
+   ========================================================================== */
+footer {
+  border-top: 1px solid var(--hairline);
+  padding: 2.5rem 0;
+}
+
+footer .inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  footer .inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* 13. Keyframes & motion preferences
+   ========================================================================== */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+}
+
+@keyframes marq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0);
+  }
+}
+
+@keyframes ember {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
