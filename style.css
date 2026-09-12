@@ -660,6 +660,12 @@ ul.pts li::before {
   font-size: 0.98rem;
 }
 
+.proj p code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9em;
+  color: var(--fg);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -694,10 +700,37 @@ ul.pts li::before {
   .side {
     flex-direction: column;
     align-items: flex-end;
+    gap: 1rem;
   }
 }
 
-.proj:hover .arrow {
+.proj-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.proj-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+.proj-link:hover {
+  color: var(--ember);
+}
+
+.proj-link .arrow {
+  width: 14px;
+  height: 14px;
+}
+
+.proj-link:hover .arrow {
   stroke: var(--ember);
   transform: translate(3px, -3px);
 }
