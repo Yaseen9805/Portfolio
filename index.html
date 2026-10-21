@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Syed Yaseen — Full-Stack Developer &amp; CS Undergrad</title>
-<meta name="description" content="Portfolio of Syed Yaseen, a full-stack developer and Computer Science undergrad in Hyderabad — Full Stack Developer Intern at AgenticJobHunt, building React interfaces, Node APIs and data-driven products." />
-<meta name="author" content="Syed Yaseen" />
-<meta property="og:title" content="Syed Yaseen — Full-Stack Developer &amp; CS Undergrad" />
+<title>Syed Yaseenuddin — Full-Stack Developer &amp; CS Undergrad</title>
+<meta name="description" content="Portfolio of Syed Yaseenuddin, a full-stack developer and Computer Science undergrad in Hyderabad — Full Stack Developer Intern at AgenticJobHunt, building React interfaces, Node APIs and data-driven products." />
+<meta name="author" content="Syed Yaseenuddin" />
+<meta property="og:title" content="Syed Yaseenuddin — Full-Stack Developer &amp; CS Undergrad" />
 <meta property="og:description" content="Full Stack Developer Intern at AgenticJobHunt and CS undergrad in Hyderabad building React interfaces, Node APIs and data-driven products." />
 <meta property="og:type" content="profile" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -37,7 +37,7 @@
   <div class="wrap" style="position:relative;z-index:1">
     <p class="eyebrow">Hyderabad, India — open to new opportunities</p>
     <h1>
-      <span class="line"><span>Syed Yaseen</span></span>
+      <span class="line"><span>Syed Yaseenuddin</span></span>
       <span class="line"><span class="dim" style="animation-delay:.12s">builds the web</span></span>
       <span class="line"><span style="animation-delay:.24s">end&nbsp;to&nbsp;end<span class="caret"></span></span></span>
     </h1>
@@ -68,7 +68,7 @@
     <div class="about">
       <div>
         <p class="lead reveal">I like the parts of software most people skip — the edge case, the failing test, the extra half hour on something nobody will ever compliment.</p>
-        <p class="reveal">Right now that means React and TypeScript for AgenticJobHunt's job-matching platform, plus the less glamorous half of the job — the 82 test cases I wrote that caught bugs early. On my own time I've built a subscription API with real auth and rate-limiting, and co-built a pregnancy-companion app with a four-person hackathon team.</p>
+        <p class="reveal">Right now that means React and TypeScript for AgenticJobHunt's job-matching platform, plus the less glamorous half of the job — the 82 test cases I wrote that caught 5 bugs before release. On my own time I've built a concurrency-safe booking app, a subscription API with real auth and rate-limiting, and co-built a pregnancy-companion app with a four-person hackathon team.</p>
         <p class="reveal">An internship at IT Aspects taught me the rest — closing a Lighthouse audit's gaps one violation at a time until accessibility, performance and SEO all held up. None of it is flashy. That's kind of the point.</p>
       </div>
       <dl class="facts">
@@ -94,8 +94,8 @@
         </div>
         <p class="meta" style="margin-top:.35rem">Remote</p>
         <ul class="pts">
-          <li>Ship React/TypeScript frontend features for an AI-powered job-matching platform (300+ registered candidates, 380+ scored job matches) that turns Claude-scored postings into real-time alerts, live at agenticjobhunt.com.</li>
-          <li>Authored 82 functional test cases in Kiwi TCMS (TC-350–431) and caught 5 confirmed bugs pre-release, including a silent DB failure and an auth-config gap spanning two endpoints.</li>
+          <li>Develop React and TypeScript features for agenticjobhunt.com, a job-matching platform with 300+ registered candidates that scores each job posting against a candidate’s resume using Claude and emails a daily shortlist.</li>
+          <li>Wrote 82 functional test cases in Kiwi TCMS and found 5 bugs before release, including a database error that failed silently and an auth misconfiguration affecting two API endpoints.</li>
         </ul>
       </li>
       <li class="reveal">
@@ -106,8 +106,8 @@
         </div>
         <p class="meta" style="margin-top:.35rem">Sydney, Australia · Remote</p>
         <ul class="pts">
-          <li>Rebuilt a multi-section marketing site (animated counters, scroll-reveal, mobile nav) in HTML5/CSS3/vanilla JavaScript from a reference design, then found and fixed ~25 layout, responsive, and interaction bugs.</li>
-          <li>Ran a Lighthouse audit and closed the gaps found, raising Accessibility 70 → 100, Best Practices 71 → 93, and SEO 91 → 100 by fixing invalid ARIA usage, heading-order violations, and missing focus states.</li>
+          <li>Rebuilt a multi-section marketing website from a reference design in HTML, CSS and vanilla JavaScript, and fixed about 25 layout, mobile and interaction bugs.</li>
+          <li>Raised Lighthouse scores for Accessibility from 70 to 100, SEO from 91 to 100 and Best Practices from 71 to 93 by correcting ARIA attributes, heading order and keyboard focus states.</li>
         </ul>
       </li>
       <li class="reveal">
@@ -118,8 +118,7 @@
         </div>
         <p class="meta" style="margin-top:.35rem">India</p>
         <ul class="pts">
-          <li>Built a Random Forest fraud classifier (scikit-learn) on 284K+ credit-card transactions (~0.17% fraud rate), using class weighting and randomized hyperparameter search to handle the extreme class imbalance.</li>
-          <li>Tuned model depth to raise fraud-detection precision from 22.6% to 93.9% (PR-AUC 0.64 → 0.83), validated with 5-fold cross-validation; built a Tkinter GUI for the end-to-end workflow.</li>
+          <li>Built a Random Forest fraud classifier in scikit-learn on the Kaggle credit-card dataset (284K transactions, 0.17% fraud); tuning tree depth raised fraud precision from 22.6% to 93.9% at 72% recall (PR-AUC 0.64 to 0.83).</li>
         </ul>
       </li>
     </ol>
@@ -133,9 +132,24 @@
       <div class="proj reveal">
         <span class="no">01</span>
         <div>
+          <h3>SeatSync</h3>
+          <p>An event-booking app where each booking is a conditional seat decrement inside a PostgreSQL transaction, so concurrent requests queue on the event’s row lock and an event cannot be oversold. Load-tested at 300 simultaneous bookings for 30 seats: exactly 30 succeeded and 270 were rejected with HTTP 409. Fixed a race where an admin changing an event’s seat count could erase concurrent bookings, using a compare-and-set update; 60 Jest and Supertest tests run in CI against a separate test database.</p>
+          <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Prisma</span><span class="tag">Jest</span></div>
+        </div>
+        <div class="side">
+          <span class="meta">2026</span>
+          <div class="proj-links">
+            <a class="proj-link" href="https://github.com/Yaseen9805/seatsync" target="_blank" rel="noreferrer">GitHub<svg class="arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a class="proj-link" href="https://seatsync-beta.vercel.app" target="_blank" rel="noreferrer">Live<svg class="arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="proj reveal">
+        <span class="no">02</span>
+        <div>
           <h3>Subscription Tracker API</h3>
-          <p>A Node.js/Express REST API for subscription tracking with JWT auth and a hardened security middleware stack (rate limiting, NoSQL-injection sanitization). Dockerized and deployed on Render with interactive Swagger docs at <code>/api-docs</code>. Auth, CRUD and renewal-date logic are validated by a 29-test Jest/Supertest suite (100% coverage on those modules, ~63% overall) and a 4-stage CI pipeline; automated renewal emails run through a serverless workflow (Upstash/QStash, Resend).</p>
-          <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">Docker</span><span class="tag">Jest</span><span class="tag">JWT</span></div>
+          <p>A REST API with JWT auth, Zod validation, rate limiting and NoSQL-injection filtering, Dockerized and deployed on Render with live Swagger docs and a database-aware health check. Upstash Workflow renewal reminders are safe to retry, skip past dates and stop once a subscription is cancelled or deleted. Fixed intermittent HTTP 500s on signup caused by how MongoDB transactions were committed; 49 Jest and Supertest tests plus lint, OpenAPI and format checks run in CI.</p>
+          <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">Docker</span><span class="tag">Jest</span></div>
         </div>
         <div class="side">
           <span class="meta">2026</span>
@@ -146,32 +160,17 @@
         </div>
       </div>
       <div class="proj reveal">
-        <span class="no">02</span>
+        <span class="no">03</span>
         <div>
           <h3>MomEase</h3>
-          <p>Owned frontend and UI/UX on a four-person hackathon team building a full-stack pregnancy/postpartum companion app (Next.js/TypeScript) — a shared ShadCN component library and Tailwind design system across five feature areas (AI chat, tracking, forum, shop). Implemented React Context for cross-cutting state (theme, cart) and Zod/React-Hook-Form-validated flows across the wellness hub, forum and shop, while teammates led backend, AI integration and the pitch.</p>
-          <div class="tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">ShadCN</span></div>
+          <p>Owned frontend and UI/UX on a four-person hackathon team building a pregnancy and postpartum app with 9 feature areas, including an AI chat, mood tracker, forum and shop, on shared shadcn/ui components. After the hackathon, ended production 500/503 errors in the AI features by moving to the supported Genkit Gemini plugin, cleared all TypeScript and ESLint errors, and added CI and a crisis helpline banner.</p>
+          <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">Genkit (Gemini)</span></div>
         </div>
         <div class="side">
           <span class="meta">2024</span>
           <div class="proj-links">
             <a class="proj-link" href="https://github.com/Yaseen9805/MomEase" target="_blank" rel="noreferrer">GitHub<svg class="arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
             <a class="proj-link" href="https://mom-ease-9805.vercel.app/" target="_blank" rel="noreferrer">Live<svg class="arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="proj reveal">
-        <span class="no">03</span>
-        <div>
-          <h3>SeatSync</h3>
-          <p>A concurrency-safe event-booking system (Next.js, TypeScript, PostgreSQL/Prisma) where each booking is one guarded atomic transaction that makes overselling structurally impossible. Load-tested at 300 concurrent bookings against 30 seats (exactly 30 booked, 270 cleanly rejected), backed by a Jest/Supertest suite run in CI and shipped live on Vercel with DB-backed rate limiting (no Redis).</p>
-          <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Prisma</span></div>
-        </div>
-        <div class="side">
-          <span class="meta">2026</span>
-          <div class="proj-links">
-            <a class="proj-link" href="https://github.com/Yaseen9805/seatsync" target="_blank" rel="noreferrer">GitHub<svg class="arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-            <a class="proj-link" href="https://seatsync-beta.vercel.app" target="_blank" rel="noreferrer">Live<svg class="arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
           </div>
         </div>
       </div>
@@ -183,12 +182,10 @@
   <div class="wrap">
     <div class="head reveal"><span class="no">04</span><h2>Stack</h2><span class="rule"></span></div>
     <div class="stack">
-      <div class="cell reveal"><h3>Languages</h3><ul><li>Python</li><li>Java</li><li>JavaScript</li><li>TypeScript</li><li>HTML5</li><li>CSS3</li></ul></div>
-      <div class="cell reveal"><h3>Web &amp; Frameworks</h3><ul><li>React</li><li>Next.js</li><li>Node.js</li><li>Express.js</li><li>REST APIs</li><li>Tailwind CSS</li></ul></div>
-      <div class="cell reveal"><h3>Databases, Auth &amp; VC</h3><ul><li>MongoDB</li><li>PostgreSQL</li><li>Prisma</li><li>JWT</li><li>Git</li></ul></div>
-      <div class="cell reveal"><h3>Testing &amp; DevOps</h3><ul><li>Jest</li><li>Supertest</li><li>Docker</li><li>GitHub Actions (CI)</li><li>Vercel</li></ul></div>
-      <div class="cell reveal"><h3>Tools</h3><ul><li>Figma</li></ul></div>
-      <div class="cell reveal"><h3>Other</h3><ul><li>Bash</li><li>Linux</li></ul></div>
+      <div class="cell reveal"><h3>Languages</h3><ul><li>TypeScript</li><li>JavaScript</li><li>Python</li><li>Java</li><li>HTML</li><li>CSS</li></ul></div>
+      <div class="cell reveal"><h3>Frameworks</h3><ul><li>React</li><li>Next.js</li><li>Node.js</li><li>Express</li><li>Tailwind CSS</li><li>Zod</li><li>scikit-learn</li></ul></div>
+      <div class="cell reveal"><h3>Databases</h3><ul><li>PostgreSQL</li><li>Prisma</li><li>MongoDB (Mongoose)</li></ul></div>
+      <div class="cell reveal"><h3>Tools</h3><ul><li>Git</li><li>GitHub Actions</li><li>Docker</li><li>Jest</li><li>Supertest</li><li>Vercel</li><li>Render</li><li>Linux</li><li>REST APIs</li><li>JWT</li><li>OpenAPI/Swagger</li></ul></div>
     </div>
   </div>
 </section>
@@ -198,28 +195,21 @@
     <div class="head reveal"><span class="no">05</span><h2>Education</h2><span class="rule"></span></div>
     <div class="edu">
       <div class="row reveal">
-        <div><h3>Lords Institute of Engineering and Technology</h3><p class="sub">B.E. Computer Science and Engineering — CGPA: 9.03/10</p></div>
-        <p class="meta" style="text-align:right">2023 — 2027<span style="display:block">Hyderabad, India</span></p>
+        <div><h3>Lords Institute of Engineering and Technology</h3><p class="sub">B.E. Computer Science and Engineering — CGPA: 9.03/10</p><p class="sub" style="margin-top:.35rem">Coursework: Data Structures, Algorithms, Operating Systems, DBMS, Computer Networks, Object-Oriented Programming</p></div>
+        <p class="meta" style="text-align:right">2023 — 2027 (Expected)<span style="display:block">Hyderabad, India</span></p>
       </div>
       <div class="row reveal">
-        <div><h3>MS Junior College</h3><p class="sub">Senior Secondary (XII) — 95.10%</p></div>
+        <div><h3>MS Junior College</h3><p class="sub">Senior Secondary (XII) — 95.1%</p></div>
         <p class="meta" style="text-align:right">2021 — 2023<span style="display:block">Hyderabad, India</span></p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="s" id="achievements">
-  <div class="wrap">
-    <div class="head reveal"><span class="no">06</span><h2>Achievements</h2><span class="rule"></span></div>
-    <p class="reveal" style="max-width:42rem;color:var(--muted);font-size:1.1rem;line-height:1.75">Solved 143+ Data Structures &amp; Algorithms problems on <a class="ul" href="https://leetcode.com/u/Yaseen9805/" target="_blank" rel="noreferrer" style="color:var(--fg)">LeetCode</a>, building problem-solving speed, algorithmic fluency, and technical-interview readiness.</p>
-  </div>
-</section>
-
 <section class="contact" id="contact">
   <div class="glow"></div>
   <div class="wrap" style="position:relative;z-index:1">
-    <p class="eyebrow reveal">07 — Contact</p>
+    <p class="eyebrow reveal">06 — Contact</p>
     <h2 class="reveal">Let’s build something worth shipping.</h2>
     <p class="lede reveal" style="margin-top:1.5rem">Open to internships, freelance builds and collaborations. The fastest way to reach me is email — I reply within a day.</p>
     <div class="ctas reveal">
@@ -240,7 +230,7 @@
 
 <footer>
   <div class="wrap inner">
-    <p class="meta">© <span id="yr"></span> Syed Yaseen</p>
+    <p class="meta">© <span id="yr"></span> Syed Yaseenuddin</p>
     <a class="meta ul" style="color:var(--ember)" href="#top">Back to top</a>
   </div>
 </footer>

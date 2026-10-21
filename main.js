@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Syed Yaseen — Portfolio
+ * Syed Yaseenuddin — Portfolio
  * Handles: footer year, tech marquee, scroll progress/nav state,
  * and the staggered scroll-reveal animation.
  */
@@ -25,7 +25,7 @@ const SKILLS = [
   "Vercel",
   "Jest",
   "Git",
-  "Figma",
+  "Zod",
   "Linux",
 ];
 
